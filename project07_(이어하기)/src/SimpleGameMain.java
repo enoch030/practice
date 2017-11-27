@@ -5,9 +5,9 @@ public class SimpleGameMain {
 		Console con = System.console();
 
 		String user;
-		int win;
-		int lose;
-		int total;
+		int win = 0;
+		int lose = 0;
+		int total = 0;
 
 		// -----------------------------------------------------------[데이터 로딩]
 		user = con.readLine("사용자 닉네임?");
@@ -44,6 +44,7 @@ public class SimpleGameMain {
 
 		while (true) {
 			System.out.println();
+			System.out.println(user+" 님의 전적: "+total+" 전 "+win+" 승 "+ ((total-win)-lose)+" 무 "+lose +" 패");
 			String in = con.readLine("적과의 조우! \n1.가위 2.바위 3.보 \n>>");
 			if (Math.random() > 0.2) {
 				System.out.println("T-T 당신은 졌습니다...");
