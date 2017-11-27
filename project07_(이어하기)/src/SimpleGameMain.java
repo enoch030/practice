@@ -9,18 +9,18 @@ public class SimpleGameMain {
 		int lose = 0;
 		int total = 0;
 
-		// -----------------------------------------------------------[ë°ì´í„° ë¡œë”©]
-		user = con.readLine("ì‚¬ìš©ì ë‹‰ë„¤ì„?");
-		File parent = new File("d:\\", "ê°€ìœ„ë°”ìœ„ë³´");
+		// -----------------------------------------------------------[µ¥ÀÌÅÍ ·Îµù]
+		user = con.readLine("´Ğ³×ÀÓÀ» ÀÔ·ÂÇØ ÁÖ¼¼¿ä:");
+		File parent = new File("d:\\", "°¡À§¹ÙÀ§º¸");
 		parent.mkdir();
 		File f = new File(parent, user + ".dat");
-		if (f.exists()) { // ì‚¬ìš©ìë‹‰ë„¤ì„.datì˜ ì„¸ì´ë¸Œ íŒŒì¼ì´ ìˆë‹ˆ?
-			// inputStream -> DataInputStreamìœ¼ë¡œ êµì²´ í›„ read
+		if (f.exists()) { // »ç¿ëÀÚ´Ğ³×ÀÓ.datÀÇ ¼¼ÀÌºê ÆÄÀÏÀÌ ÀÖ´Ï?
+			// inputStream -> DataInputStreamÀ¸·Î ±³Ã¼ ÈÄ read
 			try {
 				FileInputStream fis = new FileInputStream(f);
 				DataInputStream dis = new DataInputStream(fis);
 
-				// win/loseë¥¼ ì„¤ì •
+				// win/lose¸¦ ¼³Á¤
 				win = dis.readInt();
 				lose = dis.readInt();
 				total = dis.readInt();
@@ -31,67 +31,75 @@ public class SimpleGameMain {
 			} catch (IOException e) {
 				System.out.println(e.getMessage());
 			}
-			System.out.println(user + "ë‹˜ì˜ ê¸°ì¡´ ë°ì´í„°ë¥¼ ë¶ˆëŸ¬ë“¤ì˜€ìŠµë‹ˆë‹¤.");
+			System.out.println(user + "´ÔÀÇ ±âÁ¸ µ¥ÀÌÅÍ¸¦ ºÒ·¯µé¿´½À´Ï´Ù.");
 		} else {
 			win = 0;
 			lose = 0;
 			total = 0;
 
-			System.out.println(user + "ë‹˜ì˜ ë°ì´í„°ë¥¼ ì´ˆê¸°í™”í•˜ì˜€ìŠµë‹ˆë‹¤.");
+			System.out.println(user + "´ÔÀÇ µ¥ÀÌÅÍ¸¦ ÃÊ±âÈ­ÇÏ¿´½À´Ï´Ù.");
 		}
 
-		// -----------------------------------------------------------[ê²Œì„ ì§„í–‰]
+		// -----------------------------------------------------------[°ÔÀÓ ÁøÇà]
 
 		while (true) {
-			System.out.println();
-			System.out.println(user+" ë‹˜ì˜ ì „ì : "+total+" ì „ "+win+" ìŠ¹ "+ ((total-win)-lose)+" ë¬´ "+lose +" íŒ¨");
-			String in = con.readLine("ì ê³¼ì˜ ì¡°ìš°! \n1.ê°€ìœ„ 2.ë°”ìœ„ 3.ë³´ \n>>");
-			if (Math.random() > 0.2) {
-				System.out.println("T-T ë‹¹ì‹ ì€ ì¡ŒìŠµë‹ˆë‹¤...");
+			System.out.println("\n*********************************");
+			System.out.println(	user + " ´ÔÀÇ ÀüÀû: " + total + " Àü " + win + " ½Â " 
+							+ ((total - win) - lose) + " ¹« " + lose + " ÆĞ");
+			total++;
+			String in = con.readLine("\nÀû°úÀÇ Á¶¿ì! \n1.°¡À§ 2.¹ÙÀ§ 3.º¸ \n>>");
+			if (Math.random() > 0.3) {
 				switch (in) {
 				case "1":
-					System.out.println("ì „íˆ¬ ìƒì„¸ # ë‹¹ì‹ ì€ ê°€ìœ„.. ìƒëŒ€ë°©ì€ ë°”ìœ„!");
+					System.out.println(user+": °¡À§.. \n»ó´ë¹æ: ¹ÙÀ§!");
 					break;
 				case "2":
-					System.out.println("ì „íˆ¬ ìƒì„¸ # ë‹¹ì‹ ì€ ë°”ìœ„.. ìƒëŒ€ë°©ì€ ë³´!");
+					System.out.println(user+": ¹ÙÀ§.. \n»ó´ë¹æ: º¸!");
 					break;
 				case "3":
-					System.out.println("ì „íˆ¬ ìƒì„¸ # ë‹¹ì‹ ì€ ë³´.. ìƒëŒ€ë°©ì€ ê°€ìœ„!");
+					System.out.println(user+": º¸.. \n»ó´ë¹æ: °¡À§!");
 					break;
 				default:
+					System.out.println("Àß ¸ø ÀÔ·ÂÇÏ¼Ì½À´Ï´Ù.");
+					total--;
+					continue;
 				}
+				System.out.println("T-T ´ç½ÅÀº Á³½À´Ï´Ù...\n");
+				lose++;
 			} else {
 				if (Math.random() > 0.25) {
-					System.out.println("ë¹„ê²¼ìŠµë‹ˆë‹¤!");
+					System.out.println("ºñ°å½À´Ï´Ù!");
 				} else {
-					System.out.println("í›Œë¥­í•©ë‹ˆë‹¤! ì ì„ ë¬¼ë¦¬ì³¤ìŠµë‹ˆë‹¤!!");
+					System.out.println("ÈÇ¸¢ÇÕ´Ï´Ù! ÀûÀ» ¹°¸®ÃÆ½À´Ï´Ù!!");
+					win++;
 				}
 			}
-			// ê²Œì„ í•œ ë²ˆ ì™„ë£Œ.
+			// °ÔÀÓ ÇÑ ¹ø ¿Ï·á.
 
-			String sel = con.readLine("ëª¨í—˜ì„ ëë‚´ì‹œë ¤ë©´ N"); // ì½˜ì†”ì— ê·¸ëƒ¥ ì—”í„°ì¹˜ë©´ selì— null ë“¤ì–´ê°.
-			if (sel.equals("N")) {
+			String sel = con.readLine("\n¸ğÇèÀ» ³¡³»½Ã·Á¸é N"); // ÄÜ¼Ö¿¡ ±×³É ¿£ÅÍÄ¡¸é sel¿¡ null µé¾î°¨.
+			if (sel.equalsIgnoreCase("N")) {
 				break;
 			}
-		} // ê²Œì„ ì§„í–‰ ì¢…ë£Œ
+		} // °ÔÀÓ ÁøÇà Á¾·á
 
-		// -------------------------------------------------------------[ë°ì´í„° ì €ì¥]
-		// ì‚¬ìš©ì ì´ë¦„ìœ¼ë¡œ íŒŒì¼ ë§Œë“¤ì–´ì„œ
+		// -------------------------------------------------------------[µ¥ÀÌÅÍ ÀúÀå]
+		// »ç¿ëÀÚ ÀÌ¸§À¸·Î ÆÄÀÏ ¸¸µé¾î¼­
+		// ÆÄÀÏ output -> DataOutputStream
+		// ÀĞ¾î³¾ ¼ø¼­´ë·Î Ãâ·Â
 		try {
 			FileOutputStream fos = new FileOutputStream(f);
 			DataOutputStream dos = new DataOutputStream(fos);
-
+			dos.writeInt(win);
+			dos.writeInt(lose);
+			dos.writeInt(total);
 			dos.close();
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());
-		}
-		// íŒŒì¼ output -> DataOutputStream
-		// ì½ì–´ë‚¼ ìˆœì„œëŒ€ë¡œ ì¶œë ¥
-		catch (IOException e) {
+		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
 
-		System.out.println(user + " ë‹˜ì˜ ë°ì´í„°ê°€ ì˜ ê¸°ë¡ë˜ì—ˆìŠµë‹ˆë‹¤.");
-
+		System.out.println(user + " ´ÔÀÇ µ¥ÀÌÅÍ°¡ Àß ±â·ÏµÇ¾ú½À´Ï´Ù.");
+		
 	}
 }
